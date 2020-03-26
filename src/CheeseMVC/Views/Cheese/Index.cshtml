@@ -1,8 +1,8 @@
 ﻿@model CheeseMVC.ViewModels.CheeseListViewModel
 
-<h1>@Model.Title</h1>
+<h1>@ViewBag.Title</h1>
 
-@if (Model.Cheeses.Count == 0)
+@if (ViewBag.Cheeses.Count == 0)
 {
     <p>No cheeses yet!</p>
 }
@@ -15,7 +15,7 @@
         <th>Actions</th>
     </tr>
 
-    @foreach (var cheese in Model.Cheeses)
+    @foreach (var cheese in ViewBag.Cheeses)
     {
         <tr>
             <td>@cheese.Name</td>

@@ -12,15 +12,14 @@ namespace CheeseMVC.Controllers
 {
     public class CheeseController : Controller
     {
-
+        static private List<Cheese> Cheeses = new List<Cheese>();
         // GET: /<controller>/
         public IActionResult Index()
         {
-            CheeseListViewModel model = new CheeseListViewModel {
-                Cheeses = CheeseData.GetAll()
-            };
+            ViewBag.cheeses = CheeseData.GetAll();
+           
 
-            return View(model);
+            return View();
         }
 
         public IActionResult Add()
@@ -30,12 +29,40 @@ namespace CheeseMVC.Controllers
 
         [HttpPost]
         [Route("/Cheese/Add")]
-        public IActionResult NewCheese(string name, string description)
+        public IActionResult NewCheese(Cheese newCheese)
         {
             // Add the new cheese to my existing cheeses
-            CheeseData.Add(new Cheese(name, description));
+            CheeseData.Add(newCheese);
 
+            return Redirect("/Cheese");
+        }
+        public IActionResult Remove()
+        {
+            ViewBag.title = "Remove Cheeses";
+                ViewBag.cheeses = CheeseData.GetAll();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Remove(int[] cheeseIds)
+        {
+            foreach (int cheeseId in cheeseIds)
+            {
+                CheeseData.Remove(cheeseId);            
+           }
             return Redirect("/");
+        }
+
+        public IActionResult Edit(int cheeseId)
+        {
+            ViewBag.cheeses = CheeseData.GetById(cheeseId);
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int cheeseId, string name, string description)
+        {
+            return View();
         }
 
         public IActionResult Detail(int id)
