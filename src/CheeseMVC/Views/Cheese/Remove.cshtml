@@ -1,11 +1,12 @@
-﻿<h1>@ViewBag.title</h1>
-<form method="post">
+﻿@model CheeseMVC.ViewModels.EditCheeseViewModel
+<h1>@ViewBag.title</h1>
+<form asp-controller="Cheese" asp-action="Remove"  method="post">
 
-    @foreach(var cheese in ViewBag.cheeses)
-    {
-        <input type="checkbox" name="cheeseIds" id="@cheese.CheeseId" value="@cheese.CheeseId"/>
-        <label for="@cheese.CheeseId"> @cheese.Name</label>
-        <br/>
-    }
-    <input type ="submit" value="Remove Selected Cheeses(s)"/>
+   
+        <div>
+            
+        </div>
+        <br />
+    
+    <input type="submit" value="Remove Selected Cheeses(s)" />
 </form>

@@ -1,8 +1,8 @@
 ﻿@model CheeseMVC.ViewModels.CheeseListViewModel
 
-<h1>@ViewBag.Title</h1>
+<h1>@Model.Title</h1>
 
-@if (ViewBag.Cheeses.Count == 0)
+@if (Model.Cheeses.Count == 0)
 {
     <p>No cheeses yet!</p>
 }
@@ -12,15 +12,17 @@
     <tr>
         <th>Name</th>
         <th>Description</th>
-        <th>Actions</th>
+        <th>Type</th>
     </tr>
 
-    @foreach (var cheese in ViewBag.Cheeses)
+    @foreach (var cheese in Model.Cheeses)
     {
         <tr>
             <td>@cheese.Name</td>
             <td>@cheese.Description</td>
-            <td><a asp-controller="Cheese" asp-action="Detail" asp-route-id="@cheese.CheeseId">detail</a></td>
+            <td>@cheese.Type</td>
+            <td><a asp-controller="Cheese" asp-action="Edit" asp-route-cheeseId="@cheese.CheeseId">Edit</a></td>
+            <td><a asp-controller="Cheese" asp-action="Remove" asp-route-cheeseId="@cheese.CheeseId">Remove</a></td>
         </tr>
     }
 </table>

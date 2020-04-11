@@ -1,18 +1,34 @@
-﻿<h1>Add Cheese</h1>
+﻿@model CheeseMVC.ViewModels.EditCheeseViewModel
+<h1>Edit Cheese @Model.Name </h1>
 
-<form method="post">
-    @foreach (var cheese in ViewBag.cheeses)
-    {
+<form asp-controller="Cheese" asp-action="Edit" method="post">
+
+    <input type="hidden" (id=@Model.CheeseId ) />
+
     <div class="form-group">
-        <label for="@cheese.CheeseId">@cheese.Name</label>
-        <input class="form-control" name="cheeseIds" id="@cheese.CheeseId" type="text" />
+        <label asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" />
+        <span asp-validation-for="Name"></span>
     </div>
     <div class="form-group">
-        <label for="@cheese.CheeseId">@cheese.Description</label>
-        <input class="form-control" name="cheeseIds" id="@cheese.CheeseId" type="text" />
+        <label asp-for="Description"></label>
+        <input class="form-control" asp-for="Description" />
+        <span asp-validation-for="Description"></span>
     </div>
-    }
 
+    <div class=" form-group">
+        <label asp-for="Type"></label>
+        <select asp-for="Type" asp-items="Model.CheeseTypes"></select>
+
+    </div>
+
+    <div>
+        <input type="hidden" asp-for="CheeseId" />
+        <span asp-validation-for="CheeseId"></span>
+    </div>
     <input type="submit" value="Edit Cheese" />
+
+
+    
 
 </form>
