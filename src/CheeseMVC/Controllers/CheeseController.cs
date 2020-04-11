@@ -69,7 +69,7 @@ namespace CheeseMVC.Controllers
         {
             ViewBag.cheese = CheeseData.GetById(id);
             ViewBag.title = "Cheese Detail";
-            return View();
+            return View();  
         }
 
     }
